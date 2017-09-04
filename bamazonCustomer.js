@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
 connection.connect(function(err){
 	if (err) throw err;
 
-	start();
+	startCustomer();
 });
 
 // function displayProducts(){
@@ -24,7 +24,7 @@ connection.connect(function(err){
 // 	return choiceProducts;
 // };
 
-function start(){
+function startCustomer(){
 	connection.query("Select * FROM products", function (error, results){
 		if (error) throw error;
 
