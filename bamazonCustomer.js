@@ -48,13 +48,17 @@ function startCustomer(){
 			var id = parseInt(answer.productID.slice(0,answer.productID.indexOf(")")));
 			var quantity = results[id-1].stock_quantity - parseInt(answer.amount);
 			var total_cost = parseInt(answer.amount) * results[id-1].price;
-			connection.query("UPDATE products SET ? WHERE ?",[
-				{stock_quantity: quantity},
-				{item_id: id}
-			],function(err, result){
-				if (err) throw err;
-				console.log("Total cost is " + total_cost);
-			});
+			if (quantity >= 0){
+				connection.query("UPDATE products SET ? WHERE ?",[
+					{stock_quantity: quantity},
+					{item_id: id}
+				],function(err, result){
+					if (err) throw err;
+					console.log("Total cost is " + total_cost);
+				});
+			}else{
+				console.log("Insufficient quantity!");
+			}
 		});
 	});
 }
