@@ -52,13 +52,11 @@ INSERT INTO products (product_name,
                         500);
                         
 INSERT INTO products (product_name,
-						department_name,
                         price,
                         stock_quantity)
-			VALUES	("Fire TV Stick",
-						"Television and Video",
-                        34.99,
-                        78);
+			VALUES	("Wallet",
+                        29.99,
+                        200);
                         
 INSERT INTO products (product_name,
 						department_name,
@@ -97,4 +95,9 @@ INSERT INTO products (product_name,
                         250);
                         
 
-                        
+CREATE TABLE departments(
+	department_id INTEGER(11) auto_increment NOT NULL,
+    department_name VARCHAR(30),
+    over_head_costs DECIMAL(10,2),
+    PRIMARY KEY (department_id)
+);

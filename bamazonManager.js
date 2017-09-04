@@ -38,7 +38,7 @@ function viewLowerInventory(){
 };
 
 
-function addInvetory(){
+function addInventory(){
     connection.query("SELECT * FROM products", function(err, results){
         if (err) throw err;
         inquirer.prompt([{
@@ -113,7 +113,7 @@ function startManager(){
         }else if (choice === "View Low Inventory"){
             viewLowerInventory();
         }else if (choice === "Add to Inventory"){
-            addInvetory();
+            addInventory();
         }else{
             addProduct();
         }
