@@ -37,25 +37,30 @@ function viewLowerInventory(){
     });
 };
 
-function addInventory(){
+
+function addInvetory(){
+
+};
+
+function addProduct(){
     inquirer.prompt([{
-        name: "nameInventory",
+        name: "nameProduct",
         message: "What is the name of the new product?",
     },{
-        name: "departmentInventory",
+        name: "departmentProduct",
         message: "What department is this product from?"
     },{
-        name: "priceInventory",
+        name: "priceProduct",
         message: "What is the price of the product?"
     },{
-        name: "quantityInventory",
+        name: "quantityProduct",
         message: "How many will be available?"
     }]).then(function(answer){
         var sql_search = "INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES " +
-                        "('" + answer.nameInventory + "','" +
-                        answer.departmentInventory + "','" +
-                        answer.priceInventory + "','" +
-                        answer.quantityInventory + "')";  
+                        "('" + answer.nameProduct + "','" +
+                        answer.departmentProduct + "','" +
+                        answer.priceProduct + "','" +
+                        answer.quantityProduct + "')";  
         console.log(sql_search);
         connection.query(sql_search,function(err, result){
             if (err) throw err;
@@ -79,9 +84,9 @@ function startManager(){
         }else if (choice === "View Low Inventory"){
             viewLowerInventory();
         }else if (choice === "Add to Inventory"){
-            addInventory();
+            addInvetory();
         }else{
-
+            addProduct();
         }
     });
 }
