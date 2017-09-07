@@ -48,9 +48,11 @@ function startCustomer(){
 			var id = parseInt(answer.productID.slice(0,answer.productID.indexOf(")")));
 			var quantity = results[id-1].stock_quantity - parseInt(answer.amount);
 			var total_cost = parseInt(answer.amount) * results[id-1].price;
+			var total_sales = total_cost + results[id-1].product_sales;
+
 			if (quantity >= 0){
 				connection.query("UPDATE products SET ? WHERE ?",[
-					{stock_quantity: quantity},
+					{stock_quantity: quantity,product_sales: total_sales},
 					{item_id: id}
 				],function(err, result){
 					if (err) throw err;

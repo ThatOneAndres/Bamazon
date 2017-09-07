@@ -101,3 +101,8 @@ CREATE TABLE departments(
     over_head_costs DECIMAL(10,2),
     PRIMARY KEY (department_id)
 );
+
+ALTER TABLE products 
+ADD product_sales INTEGER(11);
+
+UPDATE products SET product_sales = 0;
