@@ -3,7 +3,8 @@ var inquirer = require("inquirer");
 var mysql = require("mysql");
 
 var connection = mysql.createConnection({
-	host: "localhost",
+    host: "localhost",
+    port: 8889,
 	user:"root",
 	password: "root",
 	database: "bamazon"
@@ -85,13 +86,19 @@ function addProduct(){
         name: "quantityProduct",
         message: "How many will be available?"
     }]).then(function(answer){
-        var sql_search = "INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES " +
-                        "('" + answer.nameProduct + "','" +
-                        answer.departmentProduct + "','" +
-                        answer.priceProduct + "','" +
-                        answer.quantityProduct + "')";  
-        console.log(sql_search);
-        connection.query(sql_search,function(err, result){
+        // var sql_search = "INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES " +
+        //                 "('" + connection.escape(answer.nameProduct) + "','" +
+        //                 connection.escape(answer.departmentProduct) + "','" +
+        //                 connection.escape(answer.priceProduct) + "','" +
+        //                 connection.escape(answer.quantityProduct) + "')";  
+        // connection.query(sql_search,function(err, result){
+        //     if (err) throw err;
+        //     console.log(result);
+        // });
+        connection.query({
+            sql: "INSERT INTO products (product_name, department_name, price, stock_quantity, product_sales) VALUES (?,?,?,?,?)",
+            values: [answer.nameProduct, answer.departmentProduct, answer.priceProduct, answer.quantityProduct, 0]
+        }, function(err, result){
             if (err) throw err;
             console.log(result);
         });
