@@ -31,7 +31,7 @@ INSERT INTO products (product_name,
 			VALUES	("Game of Thrones Season 7",
 						"Movies & TV",
                         119.99,
-                        10);
+                        4);
                         
 INSERT INTO products (product_name,
 						department_name,
@@ -102,7 +102,45 @@ CREATE TABLE departments(
     PRIMARY KEY (department_id)
 );
 
+
+INSERT INTO departments (department_name,
+                        over_head_costs)
+			VALUES	("Beauty & Personal Care",
+                        3000);
+                        
+INSERT INTO departments (department_name,
+                        over_head_costs)
+			VALUES	("Video Games",
+                        2500);
+                        
+INSERT INTO departments (department_name,
+                        over_head_costs)
+			VALUES	("Cell Phones & Accessories",
+                        1000);
+
+INSERT INTO departments (department_name,
+                        over_head_costs)
+			VALUES	("Electronics",
+                        5000);
+                        
+INSERT INTO departments (department_name,
+                        over_head_costs)
+			VALUES	("Clothing, Shoes & Jewlery",
+                        9000);
+                        
+INSERT INTO departments (department_name,
+                        over_head_costs)
+			VALUES	("Movies & TV",
+                        5000);
+
+
+SELECT * FROM departments;
+
 ALTER TABLE products 
 ADD product_sales INTEGER(11);
 
 UPDATE products SET product_sales = 0;
+
+UPDATE products SET product_sales = 20000 WHERE item_id = 1;
+
+UPDATE products SET product_sales = 20000 WHERE item_id = 2;
