@@ -35,12 +35,6 @@ function viewProductSales(){
     connection.query("SELECT departments.department_id, departments.department_name, departments.over_head_costs, products.product_sales FROM departments INNER JOIN products ON departments.department_name = products.department_name ORDER BY department_id",
     function(err,results){
         if (err) throw err;
-        // instantiate 
-
-        // var table = new Table({
-        //     head: ['department_id', 'department_name',"over_head_costs","product_sales","total_profit"]
-        // , colWidths: [50, 100]
-        // });
         var table = new Table({
             chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
                    , 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝'
@@ -69,6 +63,17 @@ function viewProductSales(){
 };
 
 function addNewDepartment(){
-
+    inquirer.prompt([{
+        name: "nameDepartment",
+        message: "What is the name of new department?",
+    },{
+        name:"overHeadCosts",
+        message: "What are the over head costs?"
+    }]).then(function(answer){
+        connection.query("INSERT INTO departments (department_name,over_head_costs)VALUES	(?,?)",[answer.nameDepartment, answer.overHeadCosts],function(err,result){
+            if (err) throw (err);
+            console.log(result);
+        })
+    });
 };
 
