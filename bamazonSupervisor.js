@@ -32,7 +32,10 @@ function startSupervisor(){
 
 
 function viewProductSales(){
-    connection.query("SELECT departments.department_id, departments.department_name, departments.over_head_costs, products.product_sales FROM departments INNER JOIN products ON departments.department_name = products.department_name ORDER BY department_id",
+    connection.query("SELECT departments.department_id, departments.department_name, departments.over_head_costs, SUM(products.product_sales) AS product_sales " +
+    "FROM departments " +
+    "INNER JOIN products " +
+    "ON departments.department_name = products.department_name GROUP BY department_id ORDER BY department_id",
     function(err,results){
         if (err) throw err;
         var table = new Table({
