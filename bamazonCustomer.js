@@ -4,7 +4,6 @@ var inquirer = require("inquirer");
 
 var connection = mysql.createConnection({
 	host: "localhost",
-	port: 8889,
 	user:"root",
 	password: "root",
 	database: "bamazon"
@@ -57,7 +56,7 @@ function startCustomer(){
 					{item_id: id}
 				],function(err, result){
 					if (err) throw err;
-					console.log("Total cost is " + total_cost);
+					console.log("Total cost is " + parseFloat(total_cost).toFixed(2));
 				});
 			}else{
 				console.log("Insufficient quantity!");

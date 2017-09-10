@@ -4,7 +4,6 @@ var mysql = require("mysql");
 
 var connection = mysql.createConnection({
     host: "localhost",
-    port: 8889,
 	user:"root",
 	password: "root",
 	database: "bamazon"
@@ -33,7 +32,7 @@ function viewLowerInventory(){
     connection.query("SELECT * FROM products WHERE stock_quantity < 5",function(err, results){
         if (err) throw err;
         for (let i = 0; i < results.length; i++){
-            console.log(results[i].product_name);
+            console.log(i + ". " + results[i].product_name);
         }
     });
 };
@@ -86,21 +85,16 @@ function addProduct(){
         name: "quantityProduct",
         message: "How many will be available?"
     }]).then(function(answer){
-        // var sql_search = "INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES " +
-        //                 "('" + connection.escape(answer.nameProduct) + "','" +
-        //                 connection.escape(answer.departmentProduct) + "','" +
-        //                 connection.escape(answer.priceProduct) + "','" +
-        //                 connection.escape(answer.quantityProduct) + "')";  
-        // connection.query(sql_search,function(err, result){
-        //     if (err) throw err;
-        //     console.log(result);
-        // });
         connection.query({
             sql: "INSERT INTO products (product_name, department_name, price, stock_quantity, product_sales) VALUES (?,?,?,?,?)",
             values: [answer.nameProduct, answer.departmentProduct, answer.priceProduct, answer.quantityProduct, 0]
         }, function(err, result){
             if (err) throw err;
-            console.log(result);
+            console.log("Successfully added " + answer.quantityProduct +
+                " products of " + answer.nameProduct + 
+                " under department " + answer.departmentProduct +
+                " for the price of " + answer.priceProduct + 
+                ". The id of the product is " + result.insertId);
         });
     });
 };
